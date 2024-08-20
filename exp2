@@ -1,0 +1,72 @@
+#to print empty plot
+plot.new()
+plot(1,type="n",xlab="",ylab="",xlim=c(0,30),ylim=c(0,30))
+ 
+
+#to print pie chart
+geeks<-c(24,53,18,22)
+labels<-c("chennai","banglore","delhi","tamilnadu")
+pie(geeks,labels)
+
+
+#to print line chart
+v<-c(23,14,22,27,43,18)
+plot(v,type="o")
+
+
+#to print bell curve
+n<-floor(rnorm(1000,550,50))
+t<-table(n)
+barplot(t)
+
+
+#to print bar chart
+marks<-c(70,85,80,74,79)
+subjects<-c("wt","bdt","daap","ns","iot")
+barplot(marks,names.arg=subjects,xlab="marks",ylab="subjects",col="lightblue",main="Comparing marks of 5 subjects")
+
+
+#to print Area chart
+install.packages('ggplot2')
+install.packages('dplyr')
+install.packages('tidyverse')
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+group<-rep(c("NORTH","SOUTH","EAST","WEST"),times=4)
+year=as.numeric(rep(seq(2017,2020),each=4))
+price<-runif(16,43,100)
+data<-data.frame(year, price, group)
+ggplot(data, aes(x=year,y=price,fill=group)) + geom_area()
+
+
+# to print dot chart
+data<-c(2,18,22,14,19,32,24,43,30)
+labels<-c("A","B","C","D","E","F","G","H","I")
+dotchart(data,labels=labels,main="DotChart Example",xlab="Value",ylab="Label")
+
+
+#to print scatter plot
+attach(mtcars)
+plot(wt,mpg,main="Scatterplot Example",xlab="Car Weight",ylab="Miles Per Gallon",pch=19)
+
+
+
+#to print box chart
+data(mtcars)
+boxplot(disp ~ gear,data=mtcars,main="Displacement by Gear",xlab="Gear",ylab="Displacement")
+
+
+#to print histogram
+v<-c(19,23,11,5,16,21,32,14,18,27,39)
+hist(v,xlab="No.of Articles",col="pink",border="white")
+
+
+#to print corrlogram
+install.packages('corrplot')
+library(corrplot)
+data(mtcars)
+cor_matrix=cor(mtcars)
+corrplot(cor_matrix,type="upper",method="square",addCoef.col="lightblue",tl.col="black",tl.srt=45)
+
+  
