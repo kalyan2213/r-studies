@@ -1,0 +1,54 @@
+ install.packages('datasets')
+ install.packages('caTools')
+ install.packages('party')
+ install.packages('dplyr')
+ install.packages('magrittr')
+ library(datasets)
+ library(caTools)
+ library(party)
+ library(dplyr)
+ library(magrittr)
+ data("readingSkills")
+ head(readingSkills)
+ sample_data=sample.split(readingSkills,SplitRatio=0.8)
+ train_data=subset(readingSkills,sample_data==TRUE)
+ test_data=subset(readingSkills,sample_data==FALSE)
+ model=ctree(nativeSpeaker ~ .,train_data)
+ plot(model)
+ 
+ 
+ 
+ 
+ 
+ library(ISLR)
+ library(rpart)
+ library(rpart.plot)
+ #build the initial decision tree
+ tree=rpart(Salary ~ Years + HmRun,data=Hitters,control=rpart.control(cp=.0001))
+ #identify best cp value to use
+ best=tree$cptable[which.min(tree$cptable[,"xerror"]),"CP"]
+ #Produce a pruned tree based on the best cp value
+ pruned_tree=prune(tree,cp=best)
+ #plot the pruned tree
+ prp(pruned_tree)
+ 
+ 
+ 
+ 
+ 
+ 
+ library(MASS)
+ library(rpart)
+ head(birthwt)
+ hist(birthwt$bwt)
+ table(birthwt$low)
+ cols=c('low', 'race', 'smoke', 'ht', 'ui')
+ birthwt[cols]=lapply(birthwt[cols], as.factor)
+ set.seed(1)
+ train=sample(1:nrow(birthwt),0.75*nrow(birthwt))
+ birthwtTree=rpart(low~ .-bwt,data=birthwt[train,],method='class')
+ plot(birthwtTree)
+ text(birthwtTree,pretty=0)
+ summary(birthwtTree)
+ birthwtPred=predict(birthwtTree,birthwt[-train,],type='class')
+ table(birthwtPred,birthwt[-train,]$low)
